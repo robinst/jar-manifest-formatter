@@ -1,0 +1,17 @@
+body {
+  margin: 20px;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-flow: row;
+}
+
+.spacer {
+  flex: auto;
+}
+
+.right-bottom .github-fork-ribbon {
+  background-color: #6d6d6d;
+}

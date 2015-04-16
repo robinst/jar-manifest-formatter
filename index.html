@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Manifest formatter</title>
+  <meta name="description" content="Pretty-prints JAR manifest files (used by OSGi)">
+  <meta name="keywords" content="format, pretty print, manifest, manifest.mf, jar, java, osgi">
+  <meta name="author" content="Robin Stocker">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="spacer"></div>
+    <div class="main">
+      <h1>JAR/OSGi manifest formatter</h1>
+      <p>
+        <textarea cols="80" rows="8" class="manifest" id="input" placeholder="Paste MANIFEST.MF contents here" spellcheck="false"></textarea>
+      </p>
+      <p>
+        <label><input id="format-packages" type="checkbox" checked>Format packages</label>
+        <label><input id="sort-packages" type="checkbox" checked>Sort packages</label>
+        <label><input id="sort-headers" type="checkbox">Sort headers</label>
+      </p>
+      <p>
+        <textarea cols="80" rows="40" class="manifest" id="output" spellcheck="false"></textarea>
+      </p>
+      <div class="github-fork-ribbon-wrapper right-bottom">
+        <div class="github-fork-ribbon">
+          <a href="https://github.com/robinst/jar-manifest-formatter">Fork me on GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+</body>
+</html>
