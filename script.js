@@ -27,16 +27,17 @@ var Formatter = (function() {
       }
 
       section.forEach(function(header) {
-         var value = header.value;
-         if (formatPackages && header.name.indexOf("-Package") !== -1) {
-            var packages = value.match(/([^,"]+|"[^"]*")+/g);
-            if (sortPackages) {
-              packages.sort();
-            }
-            console.log(packages);
-            value = packages.join("\n ");
-         }
-         result += header.name + ": " + value + "\n";
+        if (formatPackages && header.name.indexOf("-Package") !== -1) {
+          var packages = header.value.match(/([^,"]+|"[^"]*")+/g);
+          if (sortPackages) {
+            packages.sort();
+          }
+          console.log(packages);
+          var value = packages.join("\n ");
+          result += header.name + ":\n " + value + "\n";
+        } else {
+          result += header.name + ": " + header.value + "\n";
+        }
       });
 
       result += "\n";
