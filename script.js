@@ -18,6 +18,10 @@ var Formatter = (function() {
     return sections;
   }
 
+  function isPackage(headerName) {
+    return headerName.indexOf("-Package") !== -1 || headerName === "Require-Bundle";
+  }
+
   exports.format = function (manifest, formatPackages, sortPackages, sortHeaders) {
     var sections = parse(manifest);
     var result = "";
@@ -27,7 +31,7 @@ var Formatter = (function() {
       }
 
       section.forEach(function(header) {
-        if (formatPackages && header.name.indexOf("-Package") !== -1) {
+        if (formatPackages && isPackage(header.name)) {
           var packages = header.value.match(/([^,"]+|"[^"]*")+/g);
           if (sortPackages) {
             packages.sort();
