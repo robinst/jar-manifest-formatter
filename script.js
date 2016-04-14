@@ -32,11 +32,10 @@ var Formatter = (function() {
 
       section.forEach(function(header) {
         if (formatPackages && isPackage(header.name)) {
-          var packages = header.value.match(/([^,"]+|"[^"]*")+/g);
+          var packages = header.value.match(/([^,"]+|"[^"]*")+\s*/g).map(String.trim);
           if (sortPackages) {
             packages.sort();
           }
-          console.log(packages);
           var value = packages.join("\n ");
           result += header.name + ":\n " + value + "\n";
         } else {
