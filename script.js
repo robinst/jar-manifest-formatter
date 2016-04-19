@@ -18,11 +18,12 @@ var Formatter = (function() {
     return sections;
   }
 
-  function isPackage(headerName) {
-    return headerName.indexOf("-Package") !== -1 || headerName === "Require-Bundle";
+  function shouldFormat(name) {
+    var names = ["Require-Bundle", "Bundle-ClassPath", "Embedded-Artifacts"];
+    return name.indexOf("-Package") !== -1 || names.indexOf(name) !== -1;
   }
 
-  exports.format = function (manifest, formatPackages, sortPackages, sortHeaders) {
+  exports.format = function (manifest, formatLists, sortLists, sortHeaders) {
     var sections = parse(manifest);
     var result = "";
     sections.forEach(function(section) {
@@ -31,12 +32,12 @@ var Formatter = (function() {
       }
 
       section.forEach(function(header) {
-        if (formatPackages && isPackage(header.name)) {
-          var packages = header.value.match(/([^,"]+|"[^"]*")+\s*/g).map(String.trim);
-          if (sortPackages) {
-            packages.sort();
+        if (formatLists && shouldFormat(header.name)) {
+          var items = header.value.match(/([^,"]+|"[^"]*")+\s*/g).map(String.trim);
+          if (sortLists) {
+            items.sort();
           }
-          var value = packages.join("\n ");
+          var value = items.join("\n ");
           result += header.name + ":\n " + value + "\n";
         } else {
           result += header.name + ": " + header.value + "\n";
@@ -54,14 +55,14 @@ var Formatter = (function() {
 document.addEventListener('DOMContentLoaded', function() {
   var input = document.querySelector("#input");
   var output = document.querySelector("#output");
-  var formatPackages = document.querySelector("#format-packages");
-  var sortPackages = document.querySelector("#sort-packages");
+  var formatLists = document.querySelector("#format-lists");
+  var sortLists = document.querySelector("#sort-lists");
   var sortHeaders = document.querySelector("#sort-headers");
   var setFormattedOutput = function() {
-    output.value = Formatter.format(input.value, formatPackages.checked, sortPackages.checked, sortHeaders.checked);
+    output.value = Formatter.format(input.value, formatLists.checked, sortLists.checked, sortHeaders.checked);
   };
   input.addEventListener("input", setFormattedOutput);
-  formatPackages.addEventListener("change", setFormattedOutput);
-  sortPackages.addEventListener("change", setFormattedOutput);
+  formatLists.addEventListener("change", setFormattedOutput);
+  sortLists.addEventListener("change", setFormattedOutput);
   sortHeaders.addEventListener("change", setFormattedOutput);
 });
