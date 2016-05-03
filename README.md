@@ -13,6 +13,6 @@ Pull requests welcome :).
 License
 -------
 
-Copyright (c) 2015 Robin Stocker
+Copyright (c) 2015-2016 Robin Stocker
 
 MIT licensed
