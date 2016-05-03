@@ -33,7 +33,8 @@ var Formatter = (function() {
 
       section.forEach(function(header) {
         if (formatLists && shouldFormat(header.name)) {
-          var items = header.value.match(/([^,"]+|"[^"]*")+\s*/g).map(String.trim);
+          var items = header.value.match(/([^,"]+|"[^"]*")+\s*/g)
+              .map(function (s) { return s.trim(); });
           if (sortLists) {
             items.sort();
           }
