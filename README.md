@@ -10,6 +10,8 @@ https://robinst.github.io/jar-manifest-formatter/
 
 Pull requests welcome :).
 
+[![Build status](https://travis-ci.org/robinst/jar-manifest-formatter.svg?branch=master)](https://travis-ci.org/robinst/jar-manifest-formatter)
+
 License
 -------
 
