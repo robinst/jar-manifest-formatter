@@ -23,7 +23,7 @@ var Formatter = (function() {
     return name.indexOf("-Package") !== -1 || names.indexOf(name) !== -1;
   }
 
-  exports.format = function (manifest, { formatLists, sortLists, sortHeaders }) {
+  exports.format = function (manifest, { sortHeaders, formatLists, sortLists, sortAttributes }) {
     var sections = parse(manifest);
     var result = "";
     sections.forEach(function(section) {
@@ -33,12 +33,17 @@ var Formatter = (function() {
 
       section.forEach(function(header) {
         if (formatLists && shouldFormat(header.name)) {
-          var items = header.value.match(/([^,"]+|"[^"]*")+\s*/g)
-              .map(function (s) { return s.trim(); });
+          var clauses = header.value.match(/([^,"]+|"[^"]*")+\s*/g)
+              .map(s => s.trim());
           if (sortLists) {
-            items.sort();
+            clauses.sort();
           }
-          var value = items.join("\n ");
+          // https://docs.osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.common.header.syntax
+          if (sortAttributes) {
+            clauses = clauses.map(clause => clause.match(/([^;"]+|"[^"]*")+\s*/g)
+                .sort().join(";"));
+          }
+          var value = clauses.join("\n ");
           result += header.name + ":\n " + value + "\n";
         } else {
           result += header.name + ": " + header.value + "\n";
