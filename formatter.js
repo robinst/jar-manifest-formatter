@@ -5,7 +5,7 @@ var Formatter = (function() {
   function parse(manifest) {
     var sectionStrings = manifest.split("\n\n");
     var sections = [];
-    sectionStrings.forEach(function(sectionString) {
+    sectionStrings.forEach(sectionString => {
       sectionString += "\n";
       var re = /([A-Za-z0-9][A-Za-z0-9-_]+):(( [^\r\n]+(\r\n|\n|\r))+)/g;
       var headers = [];
@@ -26,12 +26,12 @@ var Formatter = (function() {
   exports.format = function (manifest, { sortHeaders, formatLists, sortLists, sortAttributes }) {
     var sections = parse(manifest);
     var result = "";
-    sections.forEach(function(section) {
+    sections.forEach(section => {
       if (sortHeaders) {
-        section.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        section.sort((a, b) => a.name.localeCompare(b.name));
       }
 
-      section.forEach(function(header) {
+      section.forEach(header => {
         if (formatLists && shouldFormat(header.name)) {
           var clauses = header.value.match(/([^,"]+|"[^"]*")+\s*/g)
               .map(s => s.trim());
