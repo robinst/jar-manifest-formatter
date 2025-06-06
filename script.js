@@ -5,7 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var sortLists = document.querySelector("#sort-lists");
   var sortHeaders = document.querySelector("#sort-headers");
   var setFormattedOutput = function() {
-    output.value = Formatter.format(input.value, formatLists.checked, sortLists.checked, sortHeaders.checked);
+    output.value = Formatter.format(input.value, {
+      formatLists: formatLists.checked,
+      sortLists: sortLists.checked,
+      sortHeaders: sortHeaders.checked
+    });
   };
   input.addEventListener("input", setFormattedOutput);
   formatLists.addEventListener("change", setFormattedOutput);

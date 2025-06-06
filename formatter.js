@@ -23,7 +23,7 @@ var Formatter = (function() {
     return name.indexOf("-Package") !== -1 || names.indexOf(name) !== -1;
   }
 
-  exports.format = function (manifest, formatLists, sortLists, sortHeaders) {
+  exports.format = function (manifest, { formatLists, sortLists, sortHeaders }) {
     var sections = parse(manifest);
     var result = "";
     sections.forEach(function(section) {
